@@ -4,8 +4,8 @@
 
 ## 구조
 
-- `service/` — 센서 데이터 수집 서비스 (gRPC 50051, CPU/VPU 빌드 변형)
-- `gateway/` — 센서 게이트웨이 서비스 (gRPC 50050)
+- `apps/service/` — 센서 데이터 수집 서비스 (gRPC 50051, CPU/VPU 빌드 변형)
+- `apps/gateway/` — 센서 게이트웨이 서비스 (gRPC 50050)
 - `protos/` — 공유 protobuf 정의 (`service.proto`, `gateway.proto`)
 - `utils/` — 보조 도구 (`file2base64`, `lidar-viewer`)
 - `docker-compose-*.yml` — 차량/플랫폼별 배포 구성
@@ -35,13 +35,13 @@ uv sync --package gateway
 
 ## 차량 설정
 
-`service/config/`:
+`apps/service/config/`:
 
 - `VEHICLE_001/` ~ `VEHICLE_005/` — 차량별 CPU 설정 (`cpu.json` + `hesai_params/`, `robo_params/`)
 - `T_BENCH_2/` — 테스트 벤치 설정
 - `vpu_a.json`, `vpu_b.json`, `vpu_c.json` — VPU 변형
 
-`gateway/config/`:
+`apps/gateway/config/`:
 
 - `ap500.json`, `test_*.json` — 게이트웨이 설정
 
@@ -68,8 +68,8 @@ docker compose -f docker-compose-vpu-a.yml up --build
 `protos/`의 정본을 수정한 뒤 각 서비스에서 pb2를 재생성한다.
 
 ```bash
-cd service && uv run python -m gen_protos
-cd gateway && uv run python -m gen_protos
+cd apps/service && uv run python -m gen_protos
+cd apps/gateway && uv run python -m gen_protos
 cd utils/lidar-viewer && uv run python -m gen_protos
 ```
 

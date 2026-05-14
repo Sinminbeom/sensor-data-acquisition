@@ -1,7 +1,7 @@
 services:
   service:
     build:
-      context: ./service
+      context: ./apps/service
       dockerfile: Dockerfile.cpu
     image: service:1.0.0
     container_name: service
@@ -12,12 +12,12 @@ services:
       - CONFIG_FILE_PATH=config/VEHICLE_005/cpu.json
     runtime: nvidia
     volumes:
-      - ./service:/app
+      - ./apps/service:/app
       - "/media/armstrong:/storage:rslave"
 
   gateway:
     build:
-      context: ./gateway
+      context: ./apps/gateway
       dockerfile: Dockerfile.cpu
     image: gateway:1.0.0
     container_name: gateway
@@ -26,7 +26,7 @@ services:
     environment:
       - CONFIG_FILE_PATH=config/ap500.json
     volumes:
-      - ./gateway:/app
+      - ./apps/gateway:/app
       - "/media/armstrong:/storage:rslave"
     depends_on:
       - service
