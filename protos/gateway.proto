@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package protos;
+
+import "service.proto";
+
+message Device {
+  string name = 1;
+}
+
+message Connections {
+  repeated Connection list = 1;
+}
+
+message Healths {
+  repeated Health list = 1;
+}
+
+message Acquisitions {
+  repeated Acquisition list = 1;
+}
+
+message VoiceTag {
+  // timestamp
+  int64 timestamp = 1;
+  // voice tag
+  bytes voice = 2;
+}
+
+// Device: CPU, VPU 등 HW 장치
+service Gateway {
+  // ping 테스트
+  rpc ping(void) returns (void);
+
+  // Device 가 정상 작동 중인지 확인. 내부적으로 HW의 OS에 ping을 날려 확인함.
+  rpc is_dev_connected(Device) returns (Connection);
+  // 모든 Device 가 정상 작동 중인지 확인
+  rpc is_all_dev_connected(void) returns (Connections);
+
+  // Device 에서 service 프로세스가 실행 되고 있는지 확인. Service 서버에 ping 메시지를 날려 확인함.
+  rpc is_dev_healthy(Device) returns (Health);
+  // 모든 Device 에서 service 가 실행 되고 있는지 확인
+  rpc is_all_dev_healthy(void) returns (Healths);
+
+  // 모든 Device 에서 센서 목록을 가져옴.
+  rpc get_sensors(void) returns (Sensors);
+
+  // 개별 센서의 연결 상태를 확인함. Sensor의 name에는 'device_name/sensor_name' 형태로 입력함.
+  rpc is_sensor_connected(Sensor) returns (Connection);
+  // 모든 센서의 연결 상태를 확인함.
+  rpc is_all_sensor_connected(void) returns (Connections);
+
+  // 개별 센서의 정상 작동 상태를 확인함 (센서에서 반환하는 값이 정상 범위 내에 있는지). Sensor의 name에는 'device_name/sensor_name' 형태로 입력함.
+  rpc is_sensor_healthy(Sensor) returns (Health);
+  // 모든 센서의 정상 작동 상태를 확인함.
+  rpc is_all_sensor_healthy(void) returns (Healths);
+
+  // 개별 센서의 스냅샷을 가져옴. Sensor의 name에는 'device_name/sensor_name' 형태로 입력함.
+  rpc get_sensor_snapshot(Sensor) returns (SensorSnapshot);
+  // 모든 센서의 스냅샷을 가져옴.
+  rpc get_all_sensor_snapshot(void) returns (SensorSnapshots);
+
+  // 개별 센서의 데이터 취득 상태를 확인함.
+  rpc is_sensor_acquiring(Sensor) returns (Acquisition);
+  // 모든 센서의 데이터 취득 상태를 확인함.
+  rpc is_all_sensor_acquiring(void) returns (Acquisitions);
+
+  // 개별 센서의 데이터 취득을 시작함.
+  rpc start_sensor_acquisition(Sensor) returns (Acquisition);
+  // 모든 센서의 데이터 취득을 시작함.
+  rpc start_all_sensor_acquisition(void) returns (Acquisitions);
+
+  // 개별 센서의 데이터 취득을 중지함.
+  rpc stop_sensor_acquisition(Sensor) returns (Acquisition);
+  // 모든 센서의 데이터 취득을 중지함.
+  rpc stop_all_sensor_acquisition(void) returns (Acquisitions);
+
+  // 음성 태그를 저장함.
+  rpc add_voice_tag(VoiceTag) returns (void);
+}

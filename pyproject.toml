@@ -1,0 +1,28 @@
+[project]
+name = "sensor-data-acquisition"
+version = "0.1.0"
+description = "sensor-data-acquisition"
+requires-python = ">=3.11"
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["service", "gateway"]
+
+[tool.uv.sources]
+python-library = { git = "ssh://git@personal-github/Sinminbeom/python-library.git", tag = "v2.11.1" }
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.407",
+    "pytest>=9.0.1",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.6",
+]
+
+[tool.pyright]
+typeCheckingMode = "basic"
+reportOptionalSubscript = "none"
+reportOptionalMemberAccess = "none"
+reportOptionalContextManager = "none"

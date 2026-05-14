@@ -1,0 +1,8 @@
+# fake converter
+*_converter.py
+
+# build directory
+build/**/*
+
+# shared object files
+*.so

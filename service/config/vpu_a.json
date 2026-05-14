@@ -1,0 +1,25 @@
+{
+  "vid": "dummy",
+  "sensors": [
+    {
+      "name": "cam_a_1",
+      "driver": "SWM100FHD",
+      "dev_num": 0,
+      "dst_ip": "192.168.10.104",
+      "dst_port": 5000,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    },
+    {
+      "name": "cam_a_2",
+      "driver": "SWM100FHD",
+      "dev_num": 1,
+      "dst_ip": "192.168.10.104",
+      "dst_port": 5001,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    }
+  ]
+}

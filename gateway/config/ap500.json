@@ -1,0 +1,33 @@
+{
+  "cpu": {
+    "ip": "192.168.20.100",
+    "ping_count": 1,
+    "ping_timeout": 2,
+    "packet_loss_threshold": 0.1,
+    "call_timeout": 2
+  },
+  "vpu_a": {
+    "ip": "192.168.10.124",
+    "ping_count": 1,
+    "ping_timeout": 2,
+    "packet_loss_threshold": 0.2,
+    "call_timeout": 2,
+    "acq_ip": "192.168.20.100"
+  },
+  "vpu_b": {
+    "ip": "192.168.10.125",
+    "ping_count": 1,
+    "ping_timeout": 2,
+    "packet_loss_threshold": 0.2,
+    "call_timeout": 2,
+    "acq_ip": "192.168.20.100"
+  },
+  "vpu_c": {
+    "ip": "192.168.10.126",
+    "ping_count": 1,
+    "ping_timeout": 2,
+    "packet_loss_threshold": 0.2,
+    "call_timeout": 2,
+    "acq_ip": "192.168.20.100"
+  }
+}

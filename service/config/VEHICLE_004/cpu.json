@@ -1,0 +1,233 @@
+{
+  "vid": "VEHICLE-004",
+  "sensors": [
+    {
+      "name": "storage",
+      "driver": "Storage",
+      "mount_point": "/storage",
+      "free_space_threshold": 104857600
+    },
+    {
+      "name": "lidar",
+      "driver": "PseudoLidar",
+      "image_width": 960,
+      "image_height": 800,
+      "zFar": 120
+    },
+    {
+      "name": "eth_e_a",
+      "driver": "AT128",
+      "src_ip": "192.168.20.201",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.100",
+      "dst_port": 2361,
+      "spin_rate": 400,
+      "return_mode": "Last Return",
+      "max_temperature_threshold": 85,
+      "min_temperature_threshold": -40,
+      "extrinsic": "config/VEHICLE_004/hesai_params/eth_e_a_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_b",
+      "driver": "AT128",
+      "src_ip": "192.168.20.202",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.100",
+      "dst_port": 2362,
+      "spin_rate": 400,
+      "return_mode": "Last Return",
+      "max_temperature_threshold": 85,
+      "min_temperature_threshold": -40,
+      "extrinsic": "config/VEHICLE_004/hesai_params/eth_e_b_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_c",
+      "driver": "AT128",
+      "src_ip": "192.168.20.203",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.101",
+      "dst_port": 2363,
+      "spin_rate": 400,
+      "return_mode": "Last Return",
+      "max_temperature_threshold": 85,
+      "min_temperature_threshold": -40,
+      "extrinsic": "config/VEHICLE_004/hesai_params/eth_e_c_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_d",
+      "driver": "AT128",
+      "src_ip": "192.168.20.204",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.101",
+      "dst_port": 2364,
+      "spin_rate": 400,
+      "return_mode": "Last Return",
+      "max_temperature_threshold": 85,
+      "min_temperature_threshold": -40,
+      "extrinsic": "config/VEHICLE_004/hesai_params/eth_e_d_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_l",
+      "driver": "RSBP",
+      "src_ip": "192.168.20.110",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.103",
+      "dst_port": 6699,
+      "difop_port": 7788,
+      "ret_mode": "Strong",
+      "rpm": 600,
+      "extrinsic": "config/VEHICLE_004/robo_params/eth_e_l_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_i",
+      "driver": "RSBP",
+      "src_ip": "192.168.20.111",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.103",
+      "dst_port": 6700,
+      "difop_port": 7789,
+      "ret_mode": "Strong",
+      "rpm": 600,
+      "extrinsic": "config/VEHICLE_004/robo_params/eth_e_i_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_j",
+      "driver": "RSBP",
+      "src_ip": "192.168.20.112",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.103",
+      "dst_port": 6701,
+      "difop_port": 7790,
+      "ret_mode": "Strong",
+      "rpm": 600,
+      "extrinsic": "config/VEHICLE_004/robo_params/eth_e_j_extrinsics.yaml"
+    },
+    {
+      "name": "eth_e_k",
+      "driver": "RSBP",
+      "src_ip": "192.168.20.113",
+      "protocol": "udp",
+      "dst_ip": "192.168.20.103",
+      "dst_port": 6702,
+      "difop_port": 7791,
+      "ret_mode": "Strong",
+      "rpm": 600,
+      "extrinsic": "config/VEHICLE_004/robo_params/eth_e_k_extrinsics.yaml"
+    },
+    {
+      "name": "cam_a_1",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.124",
+      "protocol": "udp",
+      "dst_port": 5000,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_a_2",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.124",
+      "protocol": "udp",
+      "dst_port": 5001,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_b_1",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.125",
+      "protocol": "udp",
+      "dst_port": 5100,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_b_2",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.125",
+      "protocol": "udp",
+      "dst_port": 5101,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_b_3",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.125",
+      "protocol": "udp",
+      "dst_port": 5102,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_b_4",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.125",
+      "protocol": "udp",
+      "dst_port": 5103,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_c_1",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.126",
+      "protocol": "udp",
+      "dst_port": 5200,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_c_2",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.126",
+      "protocol": "udp",
+      "dst_port": 5201,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_c_3",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.126",
+      "protocol": "udp",
+      "dst_port": 5202,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "cam_c_4",
+      "driver": "NetCamera",
+      "src_ip": "192.168.10.126",
+      "protocol": "udp",
+      "dst_port": 5203,
+      "sniff_timeout": 0.3
+    },
+    {
+      "name": "imu",
+      "driver": "BynavX1",
+      "src_ip": "192.168.20.50",
+      "protocol": "tcp",
+      "dst_port": 1111,
+      "ping_count": 1,
+      "ping_timeout": 0.3,
+      "packet_loss_threshold": 0.2,
+      "use_fake_tcp_reader": true,
+      "ntrip": {
+        "from": {
+          "ip": "115.84.164.202",
+          "port": 2101,
+          "mount_point": "YONS-RTCM32-M5",
+          "user": "seoul",
+          "password": "seoul",
+          "socket_timeout": 5,
+          "read_retry": 6
+        },
+        "to": {
+          "ip": "192.168.20.50",
+          "port": 2222
+        }
+      }
+    },
+    {
+      "name": "can",
+      "driver": "AP500CAN",
+      "local_ip": "10.0.0.2",
+      "local_port": 8282,
+      "remote_ip": "10.0.0.1",
+      "remote_port": 8282,
+      "use_fake_tcp_reader": true
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+#교정날짜 : 23.09
+header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: imu
+child_frame_id: at128_roof_rear
+transform:
+  translation:
+    x: -0.0171
+    y: -0.4868
+    z: 1.1429
+  rotation:
+    x: 0.6939
+    y: -0.7165
+    z: -0.0530
+    w: -0.0492
