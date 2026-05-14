@@ -1,7 +1,7 @@
 services:
   service:
     build:
-      context: ./service
+      context: ./apps/service
       dockerfile: Dockerfile.vpu
     image: service:1.0.0
     container_name: service
@@ -16,4 +16,4 @@ services:
       - /dev/video0:/dev/video0
       - /dev/video1:/dev/video1
     volumes:
-      - ./service:/app
+      - ./apps/service:/app

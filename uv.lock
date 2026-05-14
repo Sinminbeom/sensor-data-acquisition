@@ -380,7 +380,7 @@ toml = [
 [[package]]
 name = "gateway"
 version = "0.1.0"
-source = { editable = "gateway" }
+source = { editable = "apps/gateway" }
 dependencies = [
     { name = "grpcio" },
     { name = "grpcio-tools" },
@@ -975,7 +975,7 @@ dev = [
 [[package]]
 name = "service"
 version = "0.1.0"
-source = { editable = "service" }
+source = { editable = "apps/service" }
 dependencies = [
     { name = "python-library" },
 ]
