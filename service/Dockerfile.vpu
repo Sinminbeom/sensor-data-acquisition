@@ -1,0 +1,36 @@
+# Already contains gstreamer
+FROM nvcr.io/nvidia/l4t-base:r35.1.0
+
+RUN apt-get -y update
+
+RUN apt-get -y install --no-install-recommends \
+    build-essential \
+    python3-dev \
+    pip \
+    curl
+
+RUN apt-get -y install --no-install-recommends \
+    python-gi \
+    python3-gi \
+    gir1.2-gstreamer-1.0 \
+    gir1.2-gst-plugins-base-1.0
+
+RUN rm /usr/bin/python
+RUN ln -s python3 /usr/bin/python
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:${PATH}"
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+COPY src ./src
+
+RUN uv sync --extra vpu
+
+ENV PYTHONPATH=/app/src
+
+EXPOSE 50051
+
+CMD ["uv", "run", "python", "src/main.py"]

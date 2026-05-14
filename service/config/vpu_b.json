@@ -1,0 +1,45 @@
+{
+  "vid": "dummy",
+  "sensors": [
+    {
+      "name": "cam_b_1",
+      "driver": "SWM100FHD",
+      "dev_num": 0,
+      "dst_ip": "192.168.10.105",
+      "dst_port": 5100,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    },
+    {
+      "name": "cam_b_2",
+      "driver": "SWM100FHD",
+      "dev_num": 1,
+      "dst_ip": "192.168.10.105",
+      "dst_port": 5101,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    },
+    {
+      "name": "cam_b_3",
+      "driver": "SWM100FHD",
+      "dev_num": 2,
+      "dst_ip": "192.168.10.105",
+      "dst_port": 5102,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    },
+    {
+      "name": "cam_b_4",
+      "driver": "SWM100FHD",
+      "dev_num": 3,
+      "dst_ip": "192.168.10.105",
+      "dst_port": 5103,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+#교정날짜 : 23.08.xx
+header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: imu
+child_frame_id: rsbp_bump_right
+transform:
+  translation:
+    x: 0.7790
+    y: 2.9046
+    z: 0.5779
+  rotation:
+    x: 0.1682
+    y: 0.6997
+    z: 0.1658
+    w: 0.6743

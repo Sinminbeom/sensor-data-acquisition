@@ -1,0 +1,32 @@
+services:
+  service:
+    build:
+      context: ./service
+      dockerfile: Dockerfile.cpu
+    image: service:1.0.0
+    container_name: service
+    network_mode: host
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility,display
+      - CONFIG_FILE_PATH=config/VEHICLE_001/cpu.json
+    runtime: nvidia
+    volumes:
+      - ./service:/app
+      - "/media/armstrong:/storage:rslave"
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile.cpu
+    image: gateway:1.0.0
+    container_name: gateway
+    ports:
+      - 50050:50050
+    environment:
+      - CONFIG_FILE_PATH=config/ap500.json
+    volumes:
+      - ./gateway:/app
+      - "/media/armstrong:/storage:rslave"
+    depends_on:
+      - service

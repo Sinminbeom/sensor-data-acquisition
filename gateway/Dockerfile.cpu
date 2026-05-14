@@ -1,0 +1,24 @@
+FROM python:3.11-bookworm
+
+RUN apt-get update -y; exit 0
+
+# RUN apt-get -y install --no-install-recommends \
+#     libpcap-dev \
+#     tcpdump
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:${PATH}"
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+COPY src ./src
+
+RUN uv sync
+
+ENV PYTHONPATH=/app/src
+
+EXPOSE 50050
+
+CMD ["uv", "run", "python", "src/main.py"]

@@ -1,0 +1,19 @@
+services:
+  service:
+    build:
+      context: ./service
+      dockerfile: Dockerfile.vpu
+    image: service:1.0.0
+    container_name: service
+    ports:
+      - 50051:50051
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility,display
+      - CONFIG_FILE_PATH=config/vpu_a.json
+    privileged: true
+    runtime: nvidia
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+    volumes:
+      - ./service:/app

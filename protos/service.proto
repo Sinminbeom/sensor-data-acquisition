@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package protos;
+
+message void {}
+
+message Sensor {
+  string name = 1;
+  enum HealthCheck {
+    ENABLE = 0;
+    UNABLE = 1;
+  }
+  // Sensor 메세지가 파라미터로 사용될 경우 ability는 사용하지 않음
+  optional HealthCheck ability = 2;
+}
+
+message Sensors {
+  repeated string list = 1;
+  string reason = 2;
+}
+
+message Connection {
+  string name = 1;
+  enum State {
+    UNKNOWN = 0;
+    CONNECTED = 1;
+    DISCONNECTED = 2;
+  }
+  State state = 2;
+}
+
+message Health {
+  string name = 1;
+  enum Status {
+    UNKNOWN = 0;
+    GOOD = 1;
+    WARN = 2;
+    BAAD = 3;
+  }
+  Status status = 2;
+  string reason = 3;
+}
+
+message SensorSnapshot {
+  // 센서 이름
+  string name = 1;
+  // 컨텐츠 타입: image/jpeg
+  string content_type = 2;
+  // 데이터
+  bytes data = 3;
+}
+
+message SensorSnapshots {
+  repeated SensorSnapshot list = 1;
+}
+
+message Acquisition {
+  string name = 1;
+  enum State {
+    UNKNOWN = 0;
+    ACQUIRING = 1;
+    NOT_ACQUIRING = 2;
+  }
+  State state = 2;
+  string reason = 3;
+}
+
+service Service {
+  // ping 테스트
+  rpc ping(void) returns (void);
+
+  // 센서 목록을 가져옴.
+  rpc get_sensors(void) returns (Sensors);
+
+  // 센서의 연결 상태를 확인함.
+  rpc is_connected(Sensor) returns (Connection);
+  // 센서의 정상 작동 여부를 확인함.
+  rpc is_healthy(Sensor) returns (Health);
+
+  // 센서의 현재 스냅샷을 가져옴.
+  rpc get_snapshot(Sensor) returns (SensorSnapshot);
+  // 센서들의 현재 스냅샷을 가져옴.
+  rpc get_snapshots(void) returns (SensorSnapshots);
+
+  // 센서의 데이터 취득 상태를 확인함.
+  rpc is_acquiring(Sensor) returns (Acquisition);
+  // 센서의 데이터 취득을 시작함.
+  rpc start_acquisition(Sensor) returns (Acquisition);
+  // 센서의 데이터 취득을 중지함.
+  rpc stop_acquisition(Sensor) returns (Acquisition);
+}
