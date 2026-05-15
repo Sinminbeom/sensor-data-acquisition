@@ -1,0 +1,58 @@
+FROM ubuntu:22.04
+
+RUN apt-get update -y; exit 0
+
+RUN apt-get -y install --no-install-recommends \
+    build-essential \
+    git \
+    cmake \
+    libc++-dev \
+    libc++abi-dev
+
+RUN apt-get -y install --no-install-recommends \
+    libpcap-dev \
+    tcpdump \
+    python3-dev \
+    python3-pip \
+    curl
+
+# Install Boost and OpenSSL for AT128 driver
+RUN apt-get -y install --no-install-recommends \
+    libeigen3-dev \
+    libboost-all-dev \
+    libssl-dev
+
+RUN apt-get -y install --no-install-recommends \
+    freeglut3-dev \
+    xvfb
+
+# Install GStreamer runtime + python bindings for USBCamera / GstPipeCpu pipeline
+RUN apt-get -y install --no-install-recommends \
+    gstreamer1.0-tools \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-ugly \
+    python3-gi \
+    gir1.2-gstreamer-1.0 \
+    gir1.2-gst-plugins-base-1.0
+
+RUN ln -s python3 /usr/bin/python
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.local/bin:${PATH}"
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+COPY src ./src
+
+RUN uv sync --extra cpu
+
+ENV PYTHONPATH=/app/src
+
+EXPOSE 50051
+
+WORKDIR /app
+CMD ["uv", "run", "python", "src/main.py"]

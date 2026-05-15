@@ -1,0 +1,15 @@
+{
+  "vid": "LAPTOP",
+  "sensors": [
+    {
+      "name": "webcam",
+      "driver": "USBCamera",
+      "dev_num": 0,
+      "dst_ip": "127.0.0.1",
+      "dst_port": 5000,
+      "protocol": "udp",
+      "thumbnail_width": 640,
+      "thumbnail_height": 360
+    }
+  ]
+}
