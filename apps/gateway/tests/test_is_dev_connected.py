@@ -9,7 +9,6 @@ from gateway_pb2 import Device
 from service_pb2 import Connection, void
 
 
-# noinspection DuplicatedCode
 class TestIsDevConnected(unittest.TestCase):
     def setUp(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))

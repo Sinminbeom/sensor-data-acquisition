@@ -7,7 +7,6 @@ from drivers.SWM100FHD import SWM100FHD
 from interface import DriverError
 
 
-# noinspection DuplicatedCode
 class TestSWM100FHD(unittest.TestCase):
     swm100fhd: SWM100FHD = None
 

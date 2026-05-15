@@ -11,7 +11,6 @@ from drivers.Storage import Storage
 from interface import DriverError
 
 
-# noinspection DuplicatedCode
 class TestRSBP(unittest.TestCase):
     ACQ_DURATION = 10
     loop = False

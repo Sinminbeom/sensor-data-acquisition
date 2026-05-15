@@ -10,7 +10,6 @@ from gateway_pb2 import Device
 from service_pb2 import Health, void
 
 
-# noinspection DuplicatedCode
 class TestIsDevHealthy(unittest.TestCase):
     def setUp(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))

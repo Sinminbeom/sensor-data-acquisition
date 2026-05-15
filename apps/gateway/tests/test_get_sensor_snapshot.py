@@ -8,7 +8,6 @@ from core import GatewayServer
 from service_pb2 import void, Sensor
 
 
-# noinspection DuplicatedCode
 class TestGetSensorSnapshot(unittest.TestCase):
     def setUp(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))

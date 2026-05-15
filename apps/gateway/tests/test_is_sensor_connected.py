@@ -8,7 +8,6 @@ from core import GatewayServer
 from service_pb2 import Connection, Sensor, void
 
 
-# noinspection DuplicatedCode
 class TestProtocolGateway(unittest.TestCase):
     def setUp(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))

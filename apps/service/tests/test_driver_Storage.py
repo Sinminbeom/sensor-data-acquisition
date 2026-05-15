@@ -8,7 +8,6 @@ from drivers.Storage import Storage
 from interface import DriverError
 
 
-# noinspection DuplicatedCode
 class TestStorage(unittest.TestCase):
     storage: Storage = None
 

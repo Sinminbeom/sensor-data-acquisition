@@ -1,4 +1,3 @@
-# noinspection PyUnresolvedReferences
 from typing import Tuple
 
 import numpy
@@ -82,12 +81,10 @@ class ReqBufferRSBP(threading.Thread):
 
     def _get_lidar_setting(self):
         # http://192.168.20.110/cgi-bin/param_setting.cgi
-        # noinspection HttpUrlsUsage
         return self._get_data_from_url(f'http://{self.src_ip}/cgi-bin/param_setting.cgi')
 
     def _get_lidar_diagnostic_info(self):
         # http://192.168.20.110/cgi-bin/diagnostic_info.cgi
-        # noinspection HttpUrlsUsage
         return self._get_data_from_url(f'http://{self.src_ip}/cgi-bin/diagnostic_info.cgi')
 
     def _get_data_from_url(self, url):

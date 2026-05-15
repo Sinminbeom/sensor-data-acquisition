@@ -93,7 +93,6 @@ class BynavX1Proxy(threading.Thread):
         if not ptl_type:
             raise ProtocolError(f'Invalid protocol type: {line}')
 
-        # noinspection PyUnresolvedReferences
         nmea = line.split(',') if ptl_type == 0 else line.split(';')[0].split(',') + line.split(';')[1].split(',')
         if len(nmea) < 2:
             raise ProtocolError(f'Invalid NMEA data: {line}')
@@ -112,20 +111,17 @@ class BynavX1Proxy(threading.Thread):
             nmea[0] = nmea[0][1:]
 
         try:
-            # noinspection PyUnresolvedReferences
             class_method = getattr(self, nmea[0])
             return class_method(line, nmea)
         except AttributeError:
             # Ignore
             return {}
 
-    # noinspection PyPep8Naming
     def BESTPOSA(self, line, bestposa):
         if len(bestposa) != 32:
             raise Exception(f'Invalid BESTPOSA length: {line}')
         return self.parse_best(bestposa)
 
-    # noinspection PyPep8Naming
     def BESTGNSSPOSA(self, line, bestgnss):
         if len(bestgnss) < 10:
             raise Exception(f'Invalid BESTGNSSPOSA length: {line}')

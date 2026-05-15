@@ -10,7 +10,6 @@ from core.ServiceServer import ServiceServer
 from service_pb2 import Connection, Sensor
 
 
-# noinspection DuplicatedCode
 class TestGrpcStorage(unittest.TestCase):
     server = None
     channel = None

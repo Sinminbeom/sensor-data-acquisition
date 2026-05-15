@@ -11,7 +11,6 @@ from core.ServiceServer import ServiceServer
 from service_pb2 import Acquisition, Connection, Sensor
 
 
-# noinspection DuplicatedCode
 class TestGrpcNetCamera(unittest.TestCase):
     ACQ_DURATION = 10
     loop = False

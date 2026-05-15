@@ -57,7 +57,6 @@ class DeviceReqBuffer(threading.Thread):
 
     def _check_health(self):
         try:
-            # noinspection PyTestUnpassedFixture
             self.client.ping.with_call(void(), timeout=self.call_timeout)
             with self._health_lock:
                 self._health = Health.Status.GOOD, ''
@@ -126,7 +125,6 @@ class Device:
             return self._req_buffer.health()
 
         try:
-            # noinspection PyTestUnpassedFixture
             self._client.ping.with_call(void(), timeout=self.call_timeout)
             return Health.Status.GOOD, ''
         except grpc.RpcError as e:
