@@ -2,7 +2,8 @@ import os
 from typing import Tuple
 
 from core.const import *
-from drivers.SWM100FHD.gst_pipe import GstPipe
+from drivers.SWM100FHD.gst_pipe import IGstPipe
+from drivers.SWM100FHD.gst_pipe_gpu import GstPipeGpu
 from interface import DriverError, RealCamDriver
 
 
@@ -15,14 +16,14 @@ class SWM100FHD(RealCamDriver):
     thumbnail_width: int = 640
     thumbnail_height: int = 360
 
-    _gst_pipe: GstPipe = None
+    _gst_pipe: IGstPipe = None
 
     def on_start(self, is_init_ref: list, drivers: dict):
         if ConnState.CONNECTED != self.check_connection():
             raise DriverError(
                 f'Connection is not established: /dev/video{self.dev_num} which is named \'{self.name}\'')
-        self._gst_pipe = GstPipe(self.name, self.dev_num, self.protocol, self.dst_ip, self.dst_port,
-                                 (self.thumbnail_width, self.thumbnail_height))
+        self._gst_pipe = GstPipeGpu(self.name, self.dev_num, self.protocol, self.dst_ip, self.dst_port,
+                                    (self.thumbnail_width, self.thumbnail_height))
         self._gst_pipe.start()
 
     def on_stop(self):

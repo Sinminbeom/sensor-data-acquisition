@@ -9,7 +9,6 @@ from drivers.AT128 import AT128
 from interface import DriverError
 
 
-# noinspection DuplicatedCode
 class TestPseudoLidar(unittest.TestCase):
     at128: AT128 = None
     rsbp: RSBP = None

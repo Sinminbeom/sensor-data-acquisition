@@ -10,7 +10,6 @@ from core.ServiceServer import ServiceServer
 from service_pb2 import Sensor
 
 
-# noinspection DuplicatedCode
 class TestGrpcPseudoLidar(unittest.TestCase):
     server = None
     channel = None

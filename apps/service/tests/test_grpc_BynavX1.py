@@ -12,7 +12,6 @@ from core.ServiceServer import ServiceServer
 from service_pb2 import Connection, Health, Sensor, Acquisition
 
 
-# noinspection DuplicatedCode
 class TestGrpcBynavX1(unittest.TestCase):
     ACQ_DURATION = 10
     loop = False

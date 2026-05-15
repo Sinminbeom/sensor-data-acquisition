@@ -162,7 +162,6 @@ class PseudoLidarRenderer(threading.Thread):
             # logging.debug(f"GL: byte_stream size: {byte_stream.tell()}")
             # byte_stream.seek(0)
             with self.image_lock:
-                # noinspection PyTypeChecker
                 self.image = byte_stream.getvalue()
 
     def points(self) -> np.ndarray:

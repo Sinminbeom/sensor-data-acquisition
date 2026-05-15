@@ -1,6 +1,5 @@
 import json
 import logging
-# noinspection PyUnresolvedReferences
 from typing import Tuple
 
 import numpy
@@ -90,15 +89,12 @@ class ReqBufferAT128(threading.Thread):
     # Private methods
 
     def _get_lidar_config(self):
-        # noinspection HttpUrlsUsage
         return self._get_json_from_url(f'http://{self.src_ip}/pandar.cgi?action=get&object=lidar_config')
 
     def _get_lidar_mode(self):
-        # noinspection HttpUrlsUsage
         return self._get_json_from_url(f'http://{self.src_ip}/pandar.cgi?action=get&object=lidar_data&key=lidar_mode')
 
     def _get_lidar_statistic(self):
-        # noinspection HttpUrlsUsage
         return self._get_json_from_url(f'http://{self.src_ip}/pandar.cgi?action=get&object=operationstatistics')
 
     def _get_json_from_url(self, url):
