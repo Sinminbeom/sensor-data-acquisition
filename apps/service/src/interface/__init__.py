@@ -66,6 +66,10 @@ class RealCamDriver(IDriver, IConnectable, ISnapshotable, ABC):
     pass
 
 
+class LocalCamDriver(IDriver, IConnectable, IAcquisitable, ISnapshotable, ABC):
+    pass
+
+
 class NetCamDriver(IDriver, IAcquisitable, IHealthCheckable, ABC):
     pass
 

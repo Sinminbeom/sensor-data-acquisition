@@ -2,17 +2,17 @@
 name = "gateway"
 version = "0.1.0"
 description = "gateway"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 dependencies = [
-    "grpcio==1.62.1",
-    "grpcio-tools==1.62.1",
+    "grpcio>=1.70",
+    "grpcio-tools>=1.70",
     "jsons==1.6.3",
-    "protobuf==4.25.3",
+    "protobuf>=5.27",
     "pythonping==1.1.4",
-    "setuptools==69.2.0",
+    "setuptools>=75.0",
     "typish==1.9.3",
-    "h5py~=3.11.0",
-    "numpy~=1.24.4",
+    "h5py>=3.12",
+    "numpy>=2.1",
     "python-library",
 ]
 

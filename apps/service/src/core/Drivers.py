@@ -17,7 +17,13 @@ def import_all_drivers():
     for importer, package_name, _ in pkgutil.iter_modules([dirname]):
         full_package_name = '%s.%s' % (dirname, package_name)
         if full_package_name not in globals():
-            module = importlib.import_module(full_package_name)
+            try:
+                module = importlib.import_module(full_package_name)
+            except ImportError as e:
+                # 해당 환경에서 사용 불가한 드라이버는 skip
+                # (예: 노트북 빌드에서 AT128/RSBP C extension 미빌드)
+                logging.warning(f'Skipping driver {full_package_name}: {e}')
+                continue
             for name, obj in inspect.getmembers(module):
                 if inspect.isclass(obj):
                     globals()[name] = obj
