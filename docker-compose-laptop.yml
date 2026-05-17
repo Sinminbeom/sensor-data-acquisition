@@ -3,12 +3,14 @@ services:
     build:
       context: ./apps/service
       dockerfile: Dockerfile.laptop
+      ssh:
+        - default
     image: service:1.0.0
     container_name: service
     network_mode: host
     environment:
-      - CONFIG_FILE_PATH=config/laptop.json
+      - CONFIG_FILE_PATH=/app/config/laptop.json
     devices:
       - /dev/video0:/dev/video0
     volumes:
-      - ./apps/service:/app
+      - ./apps/service/config:/app/config   # config만 마운트 (코드/.venv는 빌드 산출물 사용)

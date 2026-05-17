@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM ubuntu:22.04
 
 RUN apt-get update -y; exit 0
@@ -48,11 +49,22 @@ WORKDIR /app
 COPY pyproject.toml ./
 COPY src ./src
 
-RUN uv sync --extra cpu
+# private 의존성(python-library) clone을 위한 SSH 설정.
+# 호스트의 'personal-github' SSH alias는 컨테이너에 없으므로 github.com으로 URL 재작성.
+RUN mkdir -p -m 0700 /root/.ssh \
+    && ssh-keyscan github.com >> /root/.ssh/known_hosts \
+    && git config --global url."ssh://git@github.com/".insteadOf "ssh://git@personal-github/"
 
-ENV PYTHONPATH=/app/src
+# uv sync 시점에 호스트 SSH agent를 BuildKit으로 forwarding (--mount=type=ssh).
+# 빌드 전에 'ssh-add ~/.ssh/id_ed25519-personal' 등으로 키가 agent에 로드되어 있어야 함.
+RUN --mount=type=ssh uv sync --extra cpu
+
+ENV PYTHONPATH=/app/src:/app/src/protos
 
 EXPOSE 50051
 
-WORKDIR /app
-CMD ["uv", "run", "python", "src/main.py"]
+# CWD를 /app/src로 두어야 Drivers.import_all_drivers()의
+# pkgutil.iter_modules(['drivers'])가 /app/src/drivers를 발견함.
+# uv run은 상위로 올라가 /app/pyproject.toml + /app/.venv를 찾으므로 무관.
+WORKDIR /app/src
+CMD ["uv", "run", "python", "main.py"]

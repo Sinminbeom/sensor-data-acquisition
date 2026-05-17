@@ -19,6 +19,10 @@ class IGstPipe(ABC):
         pass
 
     @abstractmethod
+    def is_alive(self) -> bool:
+        pass
+
+    @abstractmethod
     def snapshot(self) -> Tuple[str, bytes]:
         pass
 

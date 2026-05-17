@@ -2,25 +2,25 @@
 name = "service"
 version = "0.1.0"
 description = "service"
-requires-python = ">=3.11"
+requires-python = ">=3.14"
 dependencies = [
     "python-library",
 ]
 
 [project.optional-dependencies]
 vpu = [
-    "grpcio==1.62.1",
-    "grpcio-tools==1.62.1",
+    "grpcio>=1.70",
+    "grpcio-tools>=1.70",
     "jsons==1.6.3",
-    "protobuf==4.25.3",
-    "setuptools==69.2.0",
+    "protobuf>=5.27",
+    "setuptools>=75.0",
 ]
 cpu = [
-    "grpcio==1.62.1",
-    "grpcio-tools==1.62.1",
+    "grpcio>=1.70",
+    "grpcio-tools>=1.70",
     "jsons==1.6.3",
-    "protobuf==4.25.3",
-    "setuptools==69.2.0",
+    "protobuf>=5.27",
+    "setuptools>=75.0",
     "typish==1.9.3",
     "pythonping~=1.1.4",
     "requests~=2.31.0",
@@ -29,11 +29,11 @@ cpu = [
     "websocket-client~=1.7.0",
     "pybind11~=2.12.0",
     "PyYAML~=6.0.1",
-    "numpy~=1.24.4",
+    "numpy>=2.1",
     "PyOpenGL~=3.1.7",
     "PyOpenGL_accelerate~=3.1.7",
     "xvfbwrapper~=0.2.9",
-    "pillow~=10.3.0",
+    "pillow>=11.0",
 ]
 
 [build-system]
