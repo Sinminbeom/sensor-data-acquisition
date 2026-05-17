@@ -27,16 +27,22 @@ RUN apt-get -y install --no-install-recommends \
     freeglut3-dev \
     xvfb
 
-# Install GStreamer runtime + python bindings for USBCamera / GstPipeCpu pipeline
+# Install GStreamer runtime for USBCamera / GstPipeCpu pipeline.
+# python3-gi (system gi)는 uv venv에서 보이지 않으므로 PyGObject를 uv가 venv 안에
+# pip wheel/소스로 설치하는 방식으로 갈음 — libgirepository/libcairo/meson은 그 빌드 의존성.
 RUN apt-get -y install --no-install-recommends \
     gstreamer1.0-tools \
     gstreamer1.0-plugins-base \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
     gstreamer1.0-plugins-ugly \
-    python3-gi \
     gir1.2-gstreamer-1.0 \
-    gir1.2-gst-plugins-base-1.0
+    gir1.2-gst-plugins-base-1.0 \
+    libgirepository1.0-dev \
+    libcairo2-dev \
+    pkg-config \
+    meson \
+    ninja-build
 
 RUN ln -s python3 /usr/bin/python
 
