@@ -30,19 +30,24 @@ class GstPipeCpu(abGstPipe):
         src = Gst.ElementFactory.make("v4l2src")
         src.set_property("device", f"/dev/video{self.dev_num}")
 
+        # MJPG 1920x1080 → jpegdec로 디코드 → 이후 tee가 raw video 분배.
+        # 일반 USB 웹캠은 raw(UYVY/YUYV)로는 1080p 출력을 못 하므로 MJPG가 정답.
         caps = Gst.ElementFactory.make("capsfilter")
         caps.set_property("caps", Gst.Caps.from_string(
-            "video/x-raw,format=UYVY,width=1920,height=1080,framerate=30/1"))
+            "image/jpeg,width=1920,height=1080,framerate=30/1"))
+
+        jpegdec = Gst.ElementFactory.make("jpegdec")
 
         tee = Gst.ElementFactory.make("tee")
 
         # Build the pipeline
-        for elem in [src, caps, tee]:
+        for elem in [src, caps, jpegdec, tee]:
             self.pipeline.add(elem)
 
         # Link the elements
         src.link(caps)
-        caps.link(tee)
+        caps.link(jpegdec)
+        jpegdec.link(tee)
 
         return tee
 
@@ -53,7 +58,7 @@ class GstPipeCpu(abGstPipe):
         conv = Gst.ElementFactory.make("videoconvert")
 
         caps_conv = Gst.ElementFactory.make("capsfilter")
-        caps_conv.set_property("caps", Gst.Caps.from_string("video/x-raw,format=I420,width=1920,height=1080"))
+        caps_conv.set_property("caps", Gst.Caps.from_string("video/x-raw,format=I420"))
 
         encoder = Gst.ElementFactory.make("x264enc")
         encoder.set_property("tune", "zerolatency")

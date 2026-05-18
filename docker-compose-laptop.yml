@@ -7,10 +7,17 @@ services:
         - default
     image: service:1.0.0
     container_name: service
-    network_mode: host
+    # bridge networking: WSL2 + Docker Desktop의 host networking이 까칠해서
+    # gRPC bind/scapy sniff가 깨지는 환경 회피.
+    # USBCamera→NetCamera UDP는 컨테이너 자체 loopback 위에서 흐름.
+    privileged: true   # WSL2의 /dev/video0 v4l2 ioctl 호환을 위해 필요
+    ports:
+      - "50061:50051"   # 호스트 50051이 다른 프로세스에 점유돼 있을 때 회피용. 컨테이너 내부는 50051 그대로
     environment:
       - CONFIG_FILE_PATH=/app/config/laptop.json
+      - PYTHONUNBUFFERED=1   # stdout/stderr 실시간 flush — docker logs에 즉시 반영
     devices:
       - /dev/video0:/dev/video0
     volumes:
       - ./apps/service/config:/app/config   # config만 마운트 (코드/.venv는 빌드 산출물 사용)
+      - ./pcap:/storage                     # NetCamera/TcpDump가 pcap 누적 저장하는 경로

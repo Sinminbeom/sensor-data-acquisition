@@ -2,6 +2,12 @@
   "vid": "LAPTOP",
   "sensors": [
     {
+      "name": "storage",
+      "driver": "Storage",
+      "mount_point": "/storage",
+      "free_space_threshold": 104857600
+    },
+    {
       "name": "webcam",
       "driver": "USBCamera",
       "dev_num": 0,
@@ -10,6 +16,14 @@
       "protocol": "udp",
       "thumbnail_width": 640,
       "thumbnail_height": 360
+    },
+    {
+      "name": "webcam_sniff",
+      "driver": "NetCamera",
+      "src_ip": "127.0.0.1",
+      "protocol": "udp",
+      "dst_port": 5000,
+      "sniff_timeout": 0.3
     }
   ]
 }
