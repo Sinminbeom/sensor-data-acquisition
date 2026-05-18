@@ -22,7 +22,7 @@ class ServiceServer(pb_grpc.ServiceServicer):
     def run(self):
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         pb_grpc.add_ServiceServicer_to_server(self, server)
-        server.add_insecure_port('[::]:50051')
+        server.add_insecure_port('0.0.0.0:50051')
         server.start()
         logging.info('Service Server started. Listening on port 50051.')
         server.wait_for_termination()

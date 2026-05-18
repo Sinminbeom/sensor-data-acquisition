@@ -1,3 +1,7 @@
+# Captured packet logs (laptop test setup writes here via NetCamera/TcpDump)
+/pcap/
+*.pcap
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
