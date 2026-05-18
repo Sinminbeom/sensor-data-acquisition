@@ -12,6 +12,42 @@
 
 `python-library`를 git tag 의존성으로 사용한다.
 
+## 아키텍처
+
+```mermaid
+flowchart LR
+    Client[["Client<br/>(사용자 / 운영 도구)"]]
+
+    subgraph Vehicle["Vehicle / Test Bench"]
+        Gateway["Gateway<br/>gRPC :50050<br/>(Devices 집계)"]
+
+        subgraph CPU["CPU Device"]
+            ServiceCPU["Service<br/>gRPC :50051"]
+            DriversCPU["Drivers<br/>AT128 · RSBP · BynavX1<br/>AP500CAN · NetCamera<br/>USBCamera · SWM100FHD<br/>Storage · PseudoLidar"]
+            ServiceCPU --> DriversCPU
+        end
+
+        subgraph VPU["VPU Device (a/b/c)"]
+            ServiceVPU["Service<br/>gRPC :50051"]
+            DriversVPU["Drivers"]
+            ServiceVPU --> DriversVPU
+        end
+
+        Gateway -->|gRPC| ServiceCPU
+        Gateway -->|gRPC| ServiceVPU
+    end
+
+    Sensors[("물리 센서<br/>LiDAR · Camera · GNSS · CAN")]
+    DriversCPU --- Sensors
+    DriversVPU --- Sensors
+
+    Client -->|gRPC| Gateway
+```
+
+- `Gateway`는 `device_name/sensor_name` 네임스페이스로 여러 `Service` 인스턴스를 집계해 단일 API로 노출한다.
+- `Service`는 디바이스(CPU/VPU)당 1개 실행되며, 설정(`CONFIG_FILE_PATH`)에 따라 필요한 드라이버만 로드한다.
+- 차량/플랫폼별 배포 토폴로지는 `docker-compose-*.yml`로 정의한다.
+
 ## 사전 요구사항
 
 - Python 3.11 (`.python-version` 고정 — `grpcio-tools==1.62.1`이 3.14에서 빌드 실패)
